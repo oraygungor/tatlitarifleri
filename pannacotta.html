@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnteraktif Orijinal Panna Cotta Tarifi</title>
+    
+    <!-- Tailwind CSS'i yüklüyoruz -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display ve Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- İkonlar için Lucide kütüphanesi -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Özel stiller ve font tanımlamaları */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FBF8F3; /* Yumuşak krem arka plan */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Bilgi kutucuğu (tooltip) için stiller */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 240px; /* Genişletildi */
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -120px; /* Ayarlandı */
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Tamamlanan adımlar için üstü çizili stil */
+        input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        /* Sekme butonlarının aktif durumu için stil */
+        .tab-button.active {
+            background-color: #991B1B; /* Kırmızı Meyve Tonu */
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#FBF8F3] min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden my-8">
+        <!-- Başlık Bölümü -->
+        <div class="relative h-56 md:h-64">
+            <img src="https://www.eatme.eu/media/hpyphij5/bramen-limoen-panna-cotta-met-bramen.jpg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/1200x400/991B1B/FFFFFF?text=Panna+Cotta';"
+                 alt="Meyveli soslu Panna Cotta" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl md:text-6xl font-bold">Orijinal Panna Cotta</h1>
+                    <p class="mt-2 text-lg md:text-xl opacity-90">Piemonte'nin İpeksi Klasiği</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sekmeler (Tabs) -->
+        <div class="bg-gray-100 p-2 flex flex-wrap justify-center gap-2">
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-red-800/80 hover:text-white" onclick="openTab(event, 'Ingredients')">
+                <i data-lucide="shopping-basket"></i> Malzemeler
+            </button>
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-red-800/80 hover:text-white" onclick="openTab(event, 'Instructions')">
+                <i data-lucide="chef-hat"></i> Tarif
+            </button>
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-red-800/80 hover:text-white" onclick="openTab(event, 'History')">
+                <i data-lucide="scroll-text"></i> Tarihçe ve Notlar
+            </button>
+        </div>
+
+        <!-- Sekme İçerikleri -->
+        <div class="p-6 md:p-8">
+            <!-- Malzemeler Bölümü -->
+            <div id="Ingredients" class="tab-content">
+                <h2 class="text-3xl font-bold text-red-900 mb-6">Malzemeler</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing1" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700">
+                        <label for="ing1" class="ml-3 text-lg text-gray-700 transition-colors">
+                            <span class="tooltip">
+                                500 ml krema
+                                <span class="tooltiptext">Daha hafif bir versiyon için kremanın yarısını (250 ml) tam yağlı süt ile değiştirebilirsiniz.</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing2" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700">
+                        <label for="ing2" class="ml-3 text-lg text-gray-700 transition-colors">60 gr toz şeker</label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing3" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700">
+                        <label for="ing3" class="ml-3 text-lg text-gray-700 transition-colors">
+                            <span class="tooltip">
+                                1 vanilya çubuğu (veya 2 çay kaşığı vanilya özütü)
+                                <span class="tooltiptext">Vanilya çubuğu, tohumlarının verdiği yoğun aroma ile en otantik lezzeti sağlar.</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing4" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700">
+                        <label for="ing4" class="ml-3 text-lg text-gray-700 transition-colors">
+                            <span class="tooltip">
+                                8 gr jelatin (yaklaşık 4 yaprak)
+                                <span class="tooltiptext">Toz jelatin de kullanabilirsiniz (yaklaşık 1.5 tatlı kaşığı), ancak yaprak jelatin daha pürüzsüz bir sonuç verir.</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="flex items-start mt-4 pt-4 border-t border-gray-200">
+                        <i data-lucide="lightbulb" class="text-yellow-600 h-5 w-5 mt-1 flex-shrink-0"></i>
+                        <div class="ml-3 text-lg text-gray-700">
+                            <span class="font-semibold text-gray-800 block">Çeşitlendirme Fikirleri:</span>
+                            <p class="text-base text-gray-600">Kremayı ısıtırken içine 1-2 yemek kaşığı Baileys, 1 shot espresso veya rendelenmiş limon kabuğu ekleyerek farklı aromalar yaratabilirsiniz.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tarif Bölümü -->
+            <div id="Instructions" class="tab-content" style="display:none;">
+                <h2 class="text-3xl font-bold text-red-900 mb-6">Yapılışı</h2>
+                <ol class="space-y-6">
+                    <li class="flex">
+                        <input type="checkbox" id="step1" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700 mt-1 flex-shrink-0">
+                        <label for="step1" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Jelatini Hazırla:</span> Yaprak jelatini soğuk suda yumuşaması için bekletin.
+                        </label>
+                    </li>
+                    <li class="flex">
+                        <input type="checkbox" id="step2" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700 mt-1 flex-shrink-0">
+                        <label for="step2" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Kremayı Isıt:</span> Krema, şeker ve vanilyayı kısık ateşte, kaynamayacak şekilde ısıtın.
+                        </label>
+                    </li>
+                    <li class="flex">
+                        <input type="checkbox" id="step3" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700 mt-1 flex-shrink-0">
+                         <label for="step3" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Birleştir:</span> Jelatinin suyunu sıkarak sıcak kremaya ekleyin ve tamamen eriyene kadar karıştırın.
+                        </label>
+                    </li>
+                    <li class="flex">
+                        <input type="checkbox" id="step4" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700 mt-1 flex-shrink-0">
+                         <label for="step4" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Dök & Soğut:</span> Karışımı kalıplara dökün, oda sıcaklığında ılımasını bekledikten sonra buzdolabında en az 4–6 saat soğutun.
+                        </label>
+                    </li>
+                    <li class="flex">
+                        <input type="checkbox" id="step5" class="h-5 w-5 rounded border-gray-300 text-red-800 focus:ring-red-700 mt-1 flex-shrink-0">
+                        <label for="step5" class="ml-4 text-lg text-gray-700 transition-colors">
+                           <span class="font-semibold text-gray-800 block">Servis:</span> Üzerine taze meyve püresi, sevdiğiniz bir reçel veya çikolata sosu gezdirerek servis edin. Farklı soslarla sayısız versiyon yaratabilirsiniz.
+                        </label>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Tarihçe Bölümü -->
+            <div id="History" class="tab-content" style="display:none;">
+                <h2 class="text-3xl font-bold text-red-900 mb-6">Panna Cotta’nın Tarihi</h2>
+                <div class="space-y-6 text-gray-700">
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">İsmi & Anlamı</h3>
+                        <p>“Panna cotta” İtalyanca’da “pişmiş krema” demektir.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">Çıkış Yeri</h3>
+                        <p>Kuzey İtalya’daki Piyemonte bölgesi, özellikle Langhe yöresi.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">Efsane</h3>
+                        <p>1900’lerin başında bölgede yaşayan bir Macar kadının, jelatin bilgisini yerel süt ürünleriyle birleştirerek bu tatlıyı ortaya çıkardığı söylenir.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">Eski Benzerlikler</h3>
+                        <p>13. yy’da Danimarka’da hwit moos, Ortaçağ Fransası’nda blancmanger ve Fransız şef Carême’in fromage bavarois tatlıları, hepsi kremalı-jelatinli tatlılardı ve panna cotta’nın ataları sayılabilir.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">19. yy İzleri</h3>
+                        <p>1879’da İtalya’da geçen latte inglese (“İngiliz sütü”) adlı tatlı, panna cotta’ya çok benziyordu.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">Resmîleşme</h3>
+                        <p>1960’larda Cuneo’lu şef Ettore Songia menüsüne “panna cotta” adıyla koyarak tatlıyı bugünkü haline getirdi.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800">Modern Dönem</h3>
+                        <p>1990’lardan itibaren ABD’de büyük ilgi gördü, kolay hazırlanması sayesinde restoranlarda crème brûlée’nin bile yerini aldı.</p>
+                    </div>
+                    
+                    <div class="pt-4">
+                         <h3 class="font-semibold text-lg text-gray-800 mb-2">📌 Özet Tablo</h3>
+                         <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="p-3 border-b-2 border-gray-200 font-semibold text-gray-600">Başlık</th>
+                                        <th class="p-3 border-b-2 border-gray-200 font-semibold text-gray-600">Bilgi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Anlamı</td>
+                                        <td class="p-3 border-b border-gray-200">Pişmiş krema</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Köken</td>
+                                        <td class="p-3 border-b border-gray-200">Piyemonte (Kuzey İtalya)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Yaratıcı</td>
+                                        <td class="p-3 border-b border-gray-200">Macar kadın (efsane)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Ataları</td>
+                                        <td class="p-3 border-b border-gray-200">Blancmanger, hwit moos, fromage bavarois</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">İlk kaynak</td>
+                                        <td class="p-3 border-b border-gray-200">1879’da latte inglese</td>
+                                    </tr>
+                                     <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Bugünkü ismi</td>
+                                        <td class="p-3 border-b border-gray-200">1960’larda Ettore Songia tarafından menüye kondu</td>
+                                    </tr>
+                                     <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-semibold">Modern popülerlik</td>
+                                        <td class="p-3 border-b border-gray-200">1990’larda ABD’de yükseldi</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 text-center p-4 border-t border-gray-200">
+            <p class="text-gray-600">Afiyet olsun!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sayfa ilk yüklendiğinde varsayılan sekmeyi ve butonu ayarla
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('Ingredients').style.display = 'block';
+            document.querySelector('.tab-button').classList.add('active');
+            
+            // İkonları render et
+            lucide.createIcons();
+        });
+        
+        // Sekmeleri aç/kapa fonksiyonu
+        function openTab(evt, tabName) {
+            // Tüm tab içeriklerini gizle
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Tüm tab butonlarından 'active' sınıfını kaldır
+            const tabbuttons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            
+            // İstenen sekmeyi göster ve butonu 'active' yap
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
