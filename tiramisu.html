@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnteraktif Orijinal Tiramisu Tarifi</title>
+    
+    <!-- Tailwind CSS'i yüklüyoruz -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display ve Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- İkonlar için Lucide kütüphanesi -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Özel stiller ve font tanımlamaları */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FBF8F3; /* Yumuşak krem arka plan */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Bilgi kutucuğu (tooltip) için stiller */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Tamamlanan adımlar için üstü çizili stil */
+        input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        /* Sekme butonlarının aktif durumu için stil */
+        .tab-button.active {
+            background-color: #A16207; /* Koyu sarı */
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#FBF8F3] min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden my-8">
+        <!-- Başlık Bölümü -->
+        <div class="relative h-56 md:h-64">
+            <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=2070&auto=format&fit=crop" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/1200x400/603813/FFFFFF?text=Tiramisu';"
+                 alt="Lezzetli bir Tiramisu dilimi" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl md:text-6xl font-bold">Orijinal Tiramisu</h1>
+                    <p class="mt-2 text-lg md:text-xl opacity-90">"Le Beccherie" Restoranının Tescilli Reçetesi (1972)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sekmeler (Tabs) -->
+        <div class="bg-gray-100 p-2 flex flex-wrap justify-center gap-2">
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-yellow-800/80 hover:text-white" onclick="openTab(event, 'Ingredients')">
+                <i data-lucide="shopping-basket"></i> Malzemeler
+            </button>
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-yellow-800/80 hover:text-white" onclick="openTab(event, 'Instructions')">
+                <i data-lucide="chef-hat"></i> Tarif
+            </button>
+            <button class="tab-button flex items-center gap-2 py-2 px-4 rounded-full transition-all duration-300 hover:bg-yellow-800/80 hover:text-white" onclick="openTab(event, 'History')">
+                <i data-lucide="scroll-text"></i> Tarihçe ve Notlar
+            </button>
+        </div>
+
+        <!-- Sekme İçerikleri -->
+        <div class="p-6 md:p-8">
+            <!-- Malzemeler Bölümü -->
+            <div id="Ingredients" class="tab-content">
+                <h2 class="text-3xl font-bold text-yellow-900 mb-6">Malzemeler</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing1" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing1" class="ml-3 text-lg text-gray-700 transition-colors">
+                            <span class="tooltip">
+                                4 adet büyük boy, taze yumurta sarısı
+                                <span class="tooltiptext">Yumurtaların tazeliği, kremanın lezzeti ve güvenliği için kritiktir. Mümkünse organik kullanın.</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing2" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing2" class="ml-3 text-lg text-gray-700 transition-colors">165-170 gr toz şeker</label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing3" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing3" class="ml-3 text-lg text-gray-700 transition-colors">
+                            <span class="tooltip">
+                                330-350 gr kaliteli Mascarpone
+                                <span class="tooltiptext">Oda sıcaklığında olmalı. Bu, kremanın pürüzsüz olması ve kesilmemesi için önemlidir.</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing4" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing4" class="ml-3 text-lg text-gray-700 transition-colors">
+                           <span class="tooltip">
+                               Yaklaşık 20-24 adet Savoiardi (kedi dili) bisküvisi
+                               <span class="tooltiptext">Orijinal tarif için Savoiardi bisküvisi kullanılır. Kahveyi sünger gibi çekerler ama hemen dağılmazlar.</span>
+                           </span>
+                        </label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing5" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing5" class="ml-3 text-lg text-gray-700 transition-colors">300 ml sert demlenmiş ve tamamen soğutulmuş kahve</label>
+                    </li>
+                    <li class="flex items-center">
+                        <input type="checkbox" id="ing6" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700">
+                        <label for="ing6" class="ml-3 text-lg text-gray-700 transition-colors">Üzeri için bolca kaliteli, şekersiz kakao tozu</label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tarif Bölümü -->
+            <div id="Instructions" class="tab-content" style="display:none;">
+                <h2 class="text-3xl font-bold text-yellow-900 mb-6">Yapılış Adımları</h2>
+                <ol class="space-y-6">
+                    <!-- Adım 1 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step1" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                        <label for="step1" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Hazırlık:</span> Kahveyi demleyin ve tamamen soğuması için geniş, sığ bir kaba alıp kenarda bekletin.
+                        </label>
+                    </li>
+                    <!-- Adım 2 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step2" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                        <label for="step2" class="ml-4 text-lg text-gray-700 transition-colors">
+                             <span class="font-semibold text-gray-800 block">Kremayı Hazırlama:</span> Geniş bir kapta yumurta sarılarını ve şekeri, mikserle rengi soluk sarıya dönüp krema kıvamına gelene kadar (yaklaşık 5-7 dakika) yüksek devirde çırpın.
+                        </label>
+                    </li>
+                    <!-- Adım 3 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step3" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                         <label for="step3" class="ml-4 text-lg text-gray-700 transition-colors">
+                             <span class="font-semibold text-gray-800 block">Mascarpone'yi Ekleme:</span> Oda sıcaklığındaki mascarpone peynirini çırpılmış karışıma bir spatula ile yavaşça, alttan üste katlayarak yedirin. Pürüzsüz bir krema elde edene kadar karıştırın ama aşırı karıştırmaktan kaçının.
+                        </label>
+                    </li>
+                     <!-- Adım 4 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step4" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                         <label for="step4" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Bisküvileri Islatma:</span> Kedi dili bisküvilerini tek tek soğuk kahveye sadece 1-2 saniye batırıp hemen çıkarın ve servis kabınızın (yaklaşık 20x20 cm) tabanını kaplayacak şekilde dizin.
+                        </label>
+                    </li>
+                     <!-- Adım 5 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step5" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                        <label for="step5" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Katmanları Oluşturma:</span> Bisküvi katmanının üzerine mascarpone kremasının yarısını döküp yayın. Üzerine bir kat daha kahveye batırılmış bisküvi dizin ve kalan krema ile kaplayın.
+                        </label>
+                    </li>
+                     <!-- Adım 6 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step6" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                         <label for="step6" class="ml-4 text-lg text-gray-700 transition-colors">
+                            <span class="font-semibold text-gray-800 block">Dinlendirme (En Önemli Adım):</span> Üzerini streç filmle kapatıp buzdolabında **en az 8 saat, ideali bir gece** dinlendirin. Bu süre, lezzetlerin birleşmesi için çok önemlidir.
+                        </label>
+                    </li>
+                     <!-- Adım 7 -->
+                    <li class="flex">
+                        <input type="checkbox" id="step7" class="h-5 w-5 rounded border-gray-300 text-yellow-800 focus:ring-yellow-700 mt-1 flex-shrink-0">
+                        <label for="step7" class="ml-4 text-lg text-gray-700 transition-colors">
+                           <span class="font-semibold text-gray-800 block">Servis:</span> Servisten hemen önce üzerine süzgeç yardımıyla bolca şekersiz kakao eleyin.
+                        </label>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Tarihçe Bölümü -->
+            <div id="History" class="tab-content" style="display:none;">
+                <h2 class="text-3xl font-bold text-yellow-900 mb-6">Tiramisu'nun Yolculuğu</h2>
+                <div class="relative border-l-2 border-yellow-700/50 ml-4 pl-8 space-y-12">
+                    <!-- Zaman Tüneli Öğesi 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full bg-yellow-700"></div>
+                        <h3 class="text-xl font-semibold text-gray-800">1960'ların Sonu: İlham Kaynağı</h3>
+                        <p class="mt-2 text-gray-600">Restoran sahibi Alba Campeol'e lohusalık döneminde enerji vermesi için "sbatudin" (şekerle çırpılmış yumurta sarısı) verilir. Bu, tatlının alkolsüz ve besleyici temelini oluşturur.</p>
+                    </div>
+                    <!-- Zaman Tüneli Öğesi 2 -->
+                     <div class="relative">
+                        <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full bg-yellow-700"></div>
+                        <h3 class="text-xl font-semibold text-gray-800">1972: Lezzetin Doğuşu</h3>
+                        <p class="mt-2 text-gray-600">İtalya'nın Treviso şehrindeki "Le Beccherie" restoranında, Alba Campeol ve şef Roberto Linguanotto, "sbatudin"den ilham alarak Tiramisu'yu (anlamı: "beni yukarı çek" / "neşelendir") yaratır.</p>
+                    </div>
+                    <!-- Zaman Tüneli Öğesi 3 -->
+                     <div class="relative">
+                        <div class="absolute -left-[42px] top-1 h-4 w-4 rounded-full bg-yellow-700"></div>
+                        <h3 class="text-xl font-semibold text-gray-800">15 Ekim 2010: Resmi Tescil</h3>
+                        <p class="mt-2 text-gray-600">Orijinal tarif, noter huzurunda <a href="https://www.accademiaitalianadellacucina.it/" target="_blank" rel="noopener noreferrer" class="text-yellow-800 font-semibold hover:underline">İtalyan Mutfak Akademisi</a> tarafından resmi olarak tescil edilir. Bu tescil, tarifin alkol ve yumurta akı içermeyen otantik versiyonunu koruma altına alır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 text-center p-4 border-t border-gray-200">
+            <p class="text-gray-600">Afiyet olsun!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sayfa ilk yüklendiğinde varsayılan sekmeyi ve butonu ayarla
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('Ingredients').style.display = 'block';
+            document.querySelector('.tab-button').classList.add('active');
+            
+            // İkonları render et
+            lucide.createIcons();
+        });
+        
+        // Sekmeleri aç/kapa fonksiyonu
+        function openTab(evt, tabName) {
+            // Tüm tab içeriklerini gizle
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Tüm tab butonlarından 'active' sınıfını kaldır
+            const tabbuttons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            
+            // İstenen sekmeyi göster ve butonu 'active' yap
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
