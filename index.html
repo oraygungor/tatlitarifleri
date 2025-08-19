@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oray'ın Tarifleri - Görsel Önizleme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Stiller ve Yeni Renk Paleti */
+        :root {
+            --primary-color: #6D4C41; /* Koyu Kahve */
+            --secondary-color: #D7CCC8; /* Açık Sıcak Gri */
+            --background-color: #FBF7F3; /* Çok Açık Krem */
+            --text-color: #4E342E; /* Metin için daha koyu kahve */
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header ve Footer */
+        header, footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        header h1 {
+            font-family: var(--heading-font);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Ana Sayfa: Tarif Kartları */
+        main {
+            padding: 2rem 0;
+        }
+
+        main h2 {
+            font-family: var(--heading-font);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-card h3 {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            padding: 1rem 1.5rem 0.5rem 1.5rem;
+            color: var(--text-color);
+        }
+
+        .recipe-card p {
+            padding: 0 1.5rem 1rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        .recipe-card .btn {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .recipe-card .btn:hover {
+            background-color: #8D6E63; /* Hover için biraz daha açık kahve */
+        }
+
+        /* Mobil Cihazlar İçin Ayarlamalar */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            main h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Oray'ın Tarifleri</h1>
+            <p>Lezzetli ve pratik tatlı tarifleri dünyasına hoş geldiniz!</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Tüm Tarifler</h2>
+            <div class="recipe-grid">
+                <!-- Tiramisu Kartı -->
+                <div class="recipe-card">
+                    <img src="https://www.emborg.com/app/uploads/2023/06/1600x450px_Classic_Tiramisu.png" alt="Tiramisu" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FBF7F3/6D4C41?text=Tiramisu';">
+                    <h3>Tiramisu</h3>
+                    <p>İtalya'nın klasik lezzeti, kahve ve mascarpone peynirinin muhteşem uyumu.</p>
+                    <a href="#" class="btn">Tarife Git</a>
+                </div>
+
+                <!-- Panna Cotta Kartı -->
+                <div class="recipe-card">
+                    <img src="https://www.eatme.eu/media/hpyphij5/bramen-limoen-panna-cotta-met-bramen.jpg" alt="Panna Cotta" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FBF7F3/6D4C41?text=Panna+Cotta';">
+                    <h3>Panna Cotta</h3>
+                    <p>Kremalı, hafif ve meyveli soslarla zenginleştirebileceğiniz enfes bir tatlı.</p>
+                    <a href="#" class="btn">Tarife Git</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Oray'ın Tarifleri. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
